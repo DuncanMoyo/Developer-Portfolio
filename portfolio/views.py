@@ -1,8 +1,15 @@
 from django.shortcuts import render
+from user.models import UserProfile, Skill
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    compilation = UserProfile.objects.all()
+    featured = Skill.objects.filter(featured=True)
+    context = {
+        'object_list': compilation,
+        'featured': featured
+    }
+    return render(request, 'index.html', context)
 
 
 def blog(request):
