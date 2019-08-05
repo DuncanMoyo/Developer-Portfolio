@@ -1,11 +1,13 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import index, blog
+from user.views import index, blog
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('faicon/', include('faicon.urls')),  # icons in models
     path('', index),
     path('blog/', blog),
 ]

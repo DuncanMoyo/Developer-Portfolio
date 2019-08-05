@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'user',
+    'faicon',  # icons in models
     'phone_field',
 
 ]
@@ -89,3 +90,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH, 'static/')
 MEDIA_ROOT = os.path.join(VENV_PATH, 'media_root')
+
+# icon settings
+FAICON_YAML_FILE = 'fontawesome/metadata/icons.yml'
+FAICON_CSS_URL = 'fontawesome/css/all.css'
