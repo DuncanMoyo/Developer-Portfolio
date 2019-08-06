@@ -216,50 +216,52 @@
         <div class="overlay-mf"></div>
         <div class="container">
             <div class="row">
-                <div class="col-sm-3 col-lg-3">
-                    <div class="counter-box counter-box pt-4 pt-md-0">
-                        <div class="counter-ico">
-                            <span class="ico-circle"><i class="ion-checkmark-round"></i></span>
-                        </div>
-                        <div class="counter-num">
-                            <p class="counter">450</p>
-                            <span class="counter-text">WORKS COMPLETED</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-lg-3">
-                    <div class="counter-box pt-4 pt-md-0">
-                        <div class="counter-ico">
-                            <span class="ico-circle"><i class="ion-ios-calendar-outline"></i></span>
-                        </div>
-                        <div class="counter-num">
-                            <p class="counter">15</p>
-                            <span class="counter-text">YEARS OF EXPERIENCE</span>
+                {% for achiev in listed_achievements %}
+                    <div class="col-sm-3 col-lg-3">
+                        <div class="counter-box counter-box pt-4 pt-md-0">
+                            <div class="counter-ico">
+                                <span class="ico-circle"><i class="{{ achiev.achievement_icon }}"></i></span>
+                            </div>
+                            <div class="counter-num">
+                                <p class="counter">{{ achiev.tally }}</p>
+                                <span class="counter-text">{{ achiev.description }}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-3 col-lg-3">
-                    <div class="counter-box pt-4 pt-md-0">
-                        <div class="counter-ico">
-                            <span class="ico-circle"><i class="ion-ios-people"></i></span>
-                        </div>
-                        <div class="counter-num">
-                            <p class="counter">550</p>
-                            <span class="counter-text">TOTAL CLIENTS</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-lg-3">
-                    <div class="counter-box pt-4 pt-md-0">
-                        <div class="counter-ico">
-                            <span class="ico-circle"><i class="ion-ribbon-a"></i></span>
-                        </div>
-                        <div class="counter-num">
-                            <p class="counter">36</p>
-                            <span class="counter-text">AWARD WON</span>
+                    {% comment %}<div class="col-sm-3 col-lg-3">
+                        <div class="counter-box pt-4 pt-md-0">
+                            <div class="counter-ico">
+                                <span class="ico-circle"><i class="ion-ios-calendar-outline"></i></span>
+                            </div>
+                            <div class="counter-num">
+                                <p class="counter">15</p>
+                                <span class="counter-text">YEARS OF EXPERIENCE</span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <div class="counter-box pt-4 pt-md-0">
+                            <div class="counter-ico">
+                                <span class="ico-circle"><i class="ion-ios-people"></i></span>
+                            </div>
+                            <div class="counter-num">
+                                <p class="counter">550</p>
+                                <span class="counter-text">TOTAL CLIENTS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <div class="counter-box pt-4 pt-md-0">
+                            <div class="counter-ico">
+                                <span class="ico-circle"><i class="ion-ribbon-a"></i></span>
+                            </div>
+                            <div class="counter-num">
+                                <p class="counter">36</p>
+                                <span class="counter-text">AWARD WON</span>
+                            </div>
+                        </div>
+                    </div>{% endcomment %}
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -496,105 +498,38 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card card-blog">
+            {% for post in latest %}
+                <div class="col-md-4">
+                    <div class="card card-blog">
                     <div class="card-img">
-                        <a href="blog-single.html"><img src="{% static 'img/post-1.jpg' %}" alt=""
-                                                        class="img-fluid"></a>
+                            <a href="{{ post.html }}"><img src="{{ post.thumbnail.url }}" alt="" class="img-fluid"></a>
                     </div>
                     <div class="card-body">
                         <div class="card-category-box">
-                            <div class="card-category">
-                                <h6 class="category">Travel</h6>
-                            </div>
+                            {% for cat in post.categories.all %}
+                                <div class="card-category">
+                                    <h6 class="category">{{cat}}</h6>
+                                </div>
+                            {% endfor %}
                         </div>
-                        <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                        <p class="card-description">
-                            Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa,
-                            convallis
-                            a pellentesque nec,
-                            egestas non nisi.
-                        </p>
+                        <h3 class="card-title"><a href="blog.html">{{ post.title }}</a></h3>
+                        <p class="card-description">{{ post.overview }}</p>
                     </div>
                     <div class="card-footer">
                         <div class="post-author">
                             <a href="#">
-                                <img src="{% static 'img/testimonial-2.jpg' %}" alt="" class="avatar rounded-circle">
-                                <span class="author">Morgan Freeman</span>
+                                <img src="{{ post.author.profile_picture.url }}" alt="" class="avatar rounded-circle">
+                                <span class="author">{{ post.author.user_name }}</span>
                             </a>
                         </div>
                         <div class="post-date">
-                            <span class="ion-ios-clock-outline"></span> 10 min
+                            <span class="ion-ios-clock-outline"></span> {{ post.timestamp|timesince }}
                         </div>
+                    </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-blog">
-                    <div class="card-img">
-                        <a href="blog-single.html"><img src="{% static 'img/post-2.jpg' %}" alt=""
-                                                        class="img-fluid"></a>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-category-box">
-                            <div class="card-category">
-                                <h6 class="category">Web Design</h6>
-                            </div>
-                        </div>
-                        <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                        <p class="card-description">
-                            Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa,
-                            convallis
-                            a pellentesque nec,
-                            egestas non nisi.
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="post-author">
-                            <a href="#">
-                                <img src="{% static 'img/testimonial-2.jpg' %}" alt="" class="avatar rounded-circle">
-                                <span class="author">Morgan Freeman</span>
-                            </a>
-                        </div>
-                        <div class="post-date">
-                            <span class="ion-ios-clock-outline"></span> 10 min
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-blog">
-                    <div class="card-img">
-                        <a href="blog-single.html"><img src="{% static 'img/post-3.jpg' %}" alt=""
-                                                        class="img-fluid"></a>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-category-box">
-                            <div class="card-category">
-                                <h6 class="category">Web Design</h6>
-                            </div>
-                        </div>
-                        <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                        <p class="card-description">
-                            Proin eget tortor risus. Pellentesque in ipsum id orci porta dapibus. Praesent sapien massa,
-                            convallis
-                            a pellentesque nec,
-                            egestas non nisi.
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="post-author">
-                            <a href="#">
-                                <img src="{% static 'img/testimonial-2.jpg' %}" alt="" class="avatar rounded-circle">
-                                <span class="author">Morgan Freeman</span>
-                            </a>
-                        </div>
-                        <div class="post-date">
-                            <span class="ion-ios-clock-outline"></span> 10 min
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
     </div>
 </section>
