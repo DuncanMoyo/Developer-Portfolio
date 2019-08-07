@@ -502,7 +502,7 @@
                 <div class="col-md-4">
                     <div class="card card-blog">
                     <div class="card-img">
-                            <a href="{{ post.html }}"><img src="{{ post.thumbnail.url }}" alt="" class="img-fluid"></a>
+                            <a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" alt="" class="img-fluid"></a>
                     </div>
                     <div class="card-body">
                         <div class="card-category-box">
@@ -512,7 +512,7 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <h3 class="card-title"><a href="blog.html">{{ post.title }}</a></h3>
+                        <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                         <p class="card-description">{{ post.overview }}</p>
                     </div>
                     <div class="card-footer">
