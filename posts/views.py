@@ -30,8 +30,8 @@ def blog(request, id):
             form.instance.user = request.user
             form.instance.post = post
             form.save()
+            return redirect(reverse('post-detail', kwargs={'id': post.id}))
 
-            return redirect(reverse, 'post-detail', args={'id': post.id})
     context = {
         'blog_list': blog_list,
         'post': post,
