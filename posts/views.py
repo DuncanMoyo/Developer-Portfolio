@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse,redirect  # added these 3 for the link to the post shown in index
-from .models import Post
+from .models import Post, Category
 from django.db.models import Q
 from .forms import CommentForm
 
@@ -22,6 +22,8 @@ def search(request):
 
 
 def blog(request, id):
+    category_list = Category.objects.all()
+    most_recent = Post.objects.order_by('-timestamp')[:3]
     blog_list = Post.objects.all()
     post = get_object_or_404(Post, id=id)
     form = CommentForm(request.POST or None)
@@ -36,6 +38,8 @@ def blog(request, id):
         'blog_list': blog_list,
         'post': post,
         'form': form,
+        'most_recent': most_recent,
+        'category_list': category_list,
 
     }
     return render(request, 'blog.html', context)
