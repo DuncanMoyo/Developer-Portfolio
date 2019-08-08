@@ -16,10 +16,10 @@
         </div>
     </div>
     <div class="widget-sidebar">
-        <h5 class="sidebar-title">Recent Post</h5>
+        <h5 class="sidebar-title">Archives</h5>
         <div class="sidebar-content">
             <ul class="list-sidebar">
-                {% for post in most_recent %}
+                {% for post in oldest %}
                     <li>
                         <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                     </li>

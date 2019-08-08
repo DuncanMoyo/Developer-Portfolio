@@ -23,13 +23,13 @@ def search(request):
 
 def blog(request, id):
     category_list = Category.objects.all()
-    most_recent = Post.objects.order_by('-timestamp')[:3]
+    oldest = Post.objects.order_by('timestamp')[:3]
     blog_list = Post.objects.all()
     post = get_object_or_404(Post, id=id)
     form = CommentForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.instance.user = request.user
+            form.instance.user = request.user.author  # added author as it was giving me this error (Cannot assign "<SimpleLazyObject: <User: admin>>": "Comment.user" must be a "Author" instance.)
             form.instance.post = post
             form.save()
             return redirect(reverse('post-detail', kwargs={'id': post.id}))
@@ -38,12 +38,8 @@ def blog(request, id):
         'blog_list': blog_list,
         'post': post,
         'form': form,
-        'most_recent': most_recent,
+        'oldest': oldest,
         'category_list': category_list,
 
     }
     return render(request, 'blog.html', context)
-
-
-# def post(request, id):
-#     return render(request, 'blog.html', {})

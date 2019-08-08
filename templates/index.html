@@ -461,35 +461,34 @@
             {% for post in latest %}
                 <div class="col-md-4">
                     <div class="card card-blog">
-                    <div class="card-img">
-                            <a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" alt="" class="img-fluid"></a>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-category-box">
-                            {% for cat in post.categories.all %}
-                                <div class="card-category">
-                                    <h6 class="category">{{cat}}</h6>
-                                </div>
-                            {% endfor %}
+                        <div class="card-img">
+                                <a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" alt="" class="img-fluid"></a>
                         </div>
-                        <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                        <p class="card-description">{{ post.overview }}</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="post-author">
-                            <a href="#">
-                                <img src="{{ post.author.profile_picture.url }}" alt="" class="avatar rounded-circle">
-                                <span class="author">{{ post.author.user_name }}</span>
-                            </a>
+                        <div class="card-body">
+                            <div class="card-category-box">
+                                {% for cat in post.categories.all %}
+                                    <div class="card-category">
+                                        <h6 class="category">{{cat}}</h6>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                            <p class="card-description">{{ post.overview }}</p>
                         </div>
-                        <div class="post-date">
-                            <span class="ion-ios-clock-outline"></span> {{ post.timestamp|timesince }}
+                        <div class="card-footer">
+                            <div class="post-author">
+                                <a href="#">
+                                    <img src="{{ post.author.profile_picture.url }}" alt="" class="avatar rounded-circle">
+                                    <span class="author">{{ post.author.user_name }}</span>
+                                </a>
+                            </div>
+                            <div class="post-date">
+                                <span class="ion-ios-clock-outline">{{ post.timestamp|timesince }}</span>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             {% endfor %}
-
         </div>
     </div>
 </section>
