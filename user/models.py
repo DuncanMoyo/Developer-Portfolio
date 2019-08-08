@@ -36,15 +36,15 @@ class Achievements(models.Model):
         return self.description
 
 
-class UserProfile(models.Model):
-    name = models.CharField(max_length=30)
-    profile_picture = models.ImageField(null=True, blank=True)
-    cover_image = models.ImageField(null=True, blank=True)
-    skills = models.ManyToManyField(Skill)
-    job_name = models.OneToOneField(Job, on_delete=models.CASCADE)
-    email = models.EmailField()
-    description = models.TextField()
-    phone = models.CharField(max_length=15, default=+27640506930)
-
-    def __str__(self):
-        return self.name
+# class UserProfile(models.Model):
+#     name = models.CharField(max_length=30)
+#     profile_picture = models.ImageField(null=True, blank=True)
+#     cover_image = models.ImageField(null=True, blank=True)
+#     skills = models.ManyToManyField(Skill)
+#     job_name = models.OneToOneField(Job, on_delete=models.CASCADE)
+#     email = models.EmailField()
+#     description = models.TextField()
+#     phone = models.CharField(max_length=15, default=+27640506930)
+#
+#     def __str__(self):
+#         return self.name

@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from user.models import UserProfile, Skill, Categories, Achievements
-from posts.models import Post
+from user.models import Skill, Categories, Achievements  # UserProfile
+from posts.models import Post, Author
 
 
 def index(request):
-    latest = Post.objects.all()
+    latest = Post.objects.order_by('-timestamp')[:3]
     listed_achievements = Achievements.objects.all()
-    compilation = UserProfile.objects.all()
+    compilation = Author.objects.all()
     featured = Skill.objects.filter(featured=True)
     #categories = Categories.objects.all  # didn't realise that i actually do not need this line of code
     context = {

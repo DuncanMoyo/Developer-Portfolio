@@ -72,7 +72,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="comment-details">
-                                        <h4 class="comment-author">{{ author.user.username }}</h4>
+                                        <h4 class="comment-author">{{ comment.user.user_name }}</h4>
                                         <span>{{ comment.timestamp|timesince }}</span>
                                         <p>{{comment.content}}</p>
                                         <a href="3">Reply</a>
@@ -111,7 +111,7 @@
 <!--                                        </div>-->
 <!--                                    </div>-->
                                     <div class="col-md-12">
-                                        <button type="submit" class="button button-a button-big button-rouded">Send Message</button>
+                                        <button type="submit" class="button button-a button-big button-rouded">Send Comment</button>
                                     </div>
                                 </div>
                             </form>
