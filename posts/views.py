@@ -1,7 +1,14 @@
 from django.shortcuts import render, get_object_or_404, reverse,redirect  # added these 3 for the link to the post shown in index
-from .models import Post, Category
+from .models import Post, Category, Author
 from django.db.models import Q
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
+
+
+def get_author(user):
+    qs = Author.objects.filter(user=user)
+    if qs.exists():
+        return qs[0]
+    return None
 
 
 def search(request):
@@ -43,3 +50,50 @@ def blog(request, id):
 
     }
     return render(request, 'blog.html', context)
+
+
+def post_create(request):
+    title = 'Create'
+    form = PostForm(request.POST or None, request.FILES or None)
+    author = get_author(request.user)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.instance.author = author
+            form.save()
+            return redirect(reverse('post-detail', kwargs={
+                'id': form.instance.id
+            }))
+
+    context = {
+        'title': title,
+        'form': form,
+    }
+
+    return render(request, 'post_create.html', context)
+
+
+def post_update(request, id):
+    title = 'Update'
+    post = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST or None, request.FILES or None, instance=post)
+    author = get_author(request.user)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.instance.author = author
+            form.save()
+            return redirect(reverse('post-detail', kwargs={
+                'id': form.instance.id
+            }))
+
+    context = {
+        'title': title,
+        'form': form,
+    }
+
+    return render(request, 'post_update.html', context)
+
+
+def post_delete(request, id):
+    post = get_object_or_404(Post, id=id)
+    post.delete()
+    return redirect(reverse('home'))

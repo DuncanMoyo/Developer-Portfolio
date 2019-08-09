@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<style>
+    .post-body img {
+        width: 100%
+    }
+</style>
 {% block content %}
 <!--/ Intro Skew Star /-->
 <div class="intro intro-single route bg-image" style="background-image: url(img/overlay-bg.jpg)">
@@ -26,7 +31,7 @@
 
 <!--/ Section Blog-Single Star /-->
 <section class="blog-wrapper sect-pt4" id="blog">
-    {% comment %}{% for post in blog_list %}{% endcomment %}
+<!--    {% comment %}{% for post in blog_list %}{% endcomment %}-->
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -35,6 +40,10 @@
                             <img src="{{ post.thumbnail.url }}" class="img-fluid" alt="">
                         </div>
                         <div class="post-meta">
+                            <div>
+                                <a href="{% url 'post-update' id=post.id %}">UPDATE</a>
+                                <a href="{% url 'post-delete' id=post.id %}">DELETE</a>
+                            </div>
                             <h1 class="article-title">{{ post.title }}</h1>
                             <ul>
                                 <li>
@@ -111,7 +120,7 @@
 <!--                                        </div>-->
 <!--                                    </div>-->
                                     <div class="col-md-12">
-                                        <button type="submit" class="button button-a button-big button-rouded">Send Comment</button>
+                                        <button type="submit" class="button button-a button-big button-rounded">Send Comment</button>
                                     </div>
                                 </div>
                             </form>

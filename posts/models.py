@@ -32,16 +32,14 @@ class Author(models.Model):
 
 
 class Post(models.Model):
+    featured = models.BooleanField(default=True)
     title = models.CharField(max_length=100)
     overview = models.TextField()
-    #timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
     comment_count = models.IntegerField(default=0)
-    #view_count = models.IntegerField(default=0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     thumbnail = models.ImageField()
     categories = models.ManyToManyField(Category)
-    #featured = models.BooleanField()
-    timestamp = models.DateTimeField(default=datetime.now())
     content = HTMLField('Content', null=True, blank=True)
 
     def __str__(self):
@@ -49,6 +47,16 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={
+            'id': self.id
+        })
+
+    def get_update_url(self):
+        return reverse('post-update', kwargs={
+            'id': self.id
+        })
+
+    def get_delete_url(self):
+        return reverse('post-delete', kwargs={
             'id': self.id
         })
 

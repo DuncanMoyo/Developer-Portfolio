@@ -1,6 +1,8 @@
 Django==2.2.4
+django-crispy-forms==1.7.2
 django-faicon==0.1.0
 django-phone-field==1.7.1
+django-tinymce==2.8.0
 django-tinymce4-lite==1.7.5
 jsmin==2.2.2
 Pillow==6.1.0
