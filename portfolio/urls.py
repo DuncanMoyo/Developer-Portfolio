@@ -13,6 +13,7 @@ urlpatterns = [
     path('blog/<id>/update/', post_update, name='post-update'),
     path('blog/<id>/delete/', post_delete, name='post-delete'),
     path('tinymce/', include('tinymce.urls')),
+    path('accounts/', include('allauth.urls')),
     path('search/', search, name='search')
 ]
 

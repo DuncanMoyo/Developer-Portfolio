@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse,redirect  # added these 3 for the link to the post shown in index
-from .models import Post, Category, Author
+from .models import Post, Category, Author, PostView
 from django.db.models import Q
 from .forms import CommentForm, PostForm
 
@@ -33,6 +33,11 @@ def blog(request, id):
     oldest = Post.objects.order_by('timestamp')[:3]
     blog_list = Post.objects.all()
     post = get_object_or_404(Post, id=id)
+
+    if request.user.is_authenticated:
+        PostView.objects.get_or_create(user=request.user, post=post)
+        return redirect(reverse('post-detail', kwargs={'id': post.id}))
+
     form = CommentForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
